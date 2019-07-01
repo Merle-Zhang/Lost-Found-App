@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lost_found_app/services/authentication.dart';
+import 'package:lost_found_app/pages/map.dart';
+import 'package:lost_found_app/pages/search.dart';
+import 'package:lost_found_app/pages/setting.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -14,8 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   bool _isEmailVerified = false;
 
   @override
@@ -23,6 +24,21 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     _checkEmailVerification();
+    _widgetOptions.addAll([
+      MapPage(
+        auth: widget.auth,
+        userId: widget.userId,
+      ),
+      SearchPage(
+        auth: widget.auth,
+        userId: widget.userId,
+      ),
+      SettingPage(
+        auth: widget.auth,
+        userId: widget.userId,
+        onSignedOut: _signOut,
+      ),
+    ]);
   }
 
   void _checkEmailVerification() async {
@@ -86,11 +102,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   _signOut() async {
     try {
       await widget.auth.signOut();
@@ -100,24 +111,53 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[];
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Flutter login demo'),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: _signOut)
-          ],
-        ),
-        body: Center(child: Text('Nice!')),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          tooltip: 'Increment',
-          child: Icon(Icons.add),
-        )
+      // appBar: new AppBar(
+      //   title: new Text('Lost & Found'),
+      //   actions: <Widget>[
+      //     new FlatButton(
+      //         child: new Text('Logout',
+      //             style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+      //         onPressed: _signOut)
+      //   ],
+      // ),
+      body: _widgetOptions[_selectedIndex],
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {},
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            title: Text('Browse'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            title: Text('Search'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            title: Text('Setting'),
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
