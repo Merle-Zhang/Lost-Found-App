@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_found_app/services/authentication.dart';
-import 'package:lost_found_app/pages/map.dart';
+import 'package:lost_found_app/pages/browse.dart';
 import 'package:lost_found_app/pages/search.dart';
 import 'package:lost_found_app/pages/setting.dart';
 
