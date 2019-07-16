@@ -12,6 +12,6 @@ class Item {
 }
 
 enum Catagory {
-  Book,
-  Key,
+  book,
+  key,
 }

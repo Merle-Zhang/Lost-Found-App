@@ -3,6 +3,10 @@ include: package:pedantic/analysis_options.yaml
 analyzer:
   exclude:
     - lib/src/locations.g.dart
+    - lib/pages/home_page.dart
+    - lib/pages/login_signup_page.dart
+    - lib/pages/root_page.dart
+    - lib/services/authentication.dart
 
 linter:
   rules:
