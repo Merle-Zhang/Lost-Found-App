@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lost_found_app/services/authentication.dart';
 
 class SettingPage extends StatefulWidget {
-  SettingPage({Key key, this.auth, this.userId, this.onSignedOut}) : super(key: key);
+  SettingPage({Key key, this.auth, this.userId, this.onSignedOut})
+      : super(key: key);
 
   final BaseAuth auth;
   final VoidCallback onSignedOut;
