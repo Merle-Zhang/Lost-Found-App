@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lost_found_app/services/authentication.dart';
-import 'package:lost_found_app/pages/map.dart';
+import 'package:lost_found_app/pages/browse/map.dart';
 
 class MapPage extends StatefulWidget {
   MapPage({Key key, this.auth, this.userId}) : super(key: key);
@@ -25,7 +25,7 @@ class _MapPageState extends State<MapPage> {
           ),
         ],
       ),
-      body: Map(),
+      body: ItemsMap(),
     );
   }
 }
