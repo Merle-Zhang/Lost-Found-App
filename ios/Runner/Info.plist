@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- This entry forces Flutter on iOS into a single threaded mode, -->
+	<!-- which is required for the platform view embedding to work. -->
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
+    <!-- to here. -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
